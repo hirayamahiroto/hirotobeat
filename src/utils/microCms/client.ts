@@ -15,7 +15,13 @@ export const client = createClient({
 
 export const getBlogs = async () => {
     try {
-        const data = await client.get({ endpoint: "blogs" });        
+        const data = await client.get({ 
+            endpoint: "blogs",
+            customRequestInit: {
+                cache: "no-store",
+            },
+        });
+
         return data.contents;
     } catch (error) {
         console.error('Error fetching blogs:', error);
@@ -25,7 +31,12 @@ export const getBlogs = async () => {
 
 export const getBlogDetail = async (id: string) => {
     try {
-        const data = await client.get({ endpoint: `blogs/${id}` });
+        const data = await client.get({ 
+            endpoint: `blogs/${id}`,
+            customRequestInit: {
+                cache: "no-store",
+            },
+        });
         return data;
     } catch (error) {
         console.error('Error fetching blog:', error);
