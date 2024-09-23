@@ -33,9 +33,6 @@ export const getBlogDetail = async (id: string) => {
     try {
         const data = await client.get({ 
             endpoint: `blogs/${id}`,
-            customRequestInit: {
-                cache: "no-store",
-            },
         });
         return data;
     } catch (error) {
