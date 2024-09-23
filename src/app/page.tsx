@@ -4,6 +4,8 @@ import { getBlogs } from "@/utils/microCms/client";
 import { PageTitle } from "@/components/atoms/pageTitle";
 import Link from "next/link";
 
+export const revalidate = 60;
+
 type Blog = {
     id: string;
     title: string;
