@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import { getBlogDetail } from '../../../utils/microCms/client';
 import { Header } from '@/components/organisms/header';
 import Image from 'next/image';
+import styles from './style.module.css';
 
 type Blog = {
     id: string;
@@ -59,9 +60,9 @@ const BlogDetailPage = () => {
     if (!blog) return <div className="flex justify-center items-center h-screen text-gray-400 text-xl font-light">No blog found</div>;
 
     return (
-        <div className="bg-white min-h-screen text-gray-800">
+        <div id='blog' className={`blog bg-white min-h-screen text-gray-800`}>
             <Header />
-            <div className="max-w-4xl mx-auto px-4 py-16">
+            <div className={`max-w-4xl mx-auto px-4 py-16 ${styles.blog}`}>
                 <article className="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-100">
                     <div className="p-8">
                         <h1 className="text-4xl font-bold text-gray-900 mb-4 leading-tight">{blog.title}</h1>
