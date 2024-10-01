@@ -5,19 +5,6 @@ import { CardList } from "@/components/organisms/cardList";
 
 export const revalidate = 60;
 
-type Blog = {
-    id: string;
-    title: string;
-    content: string;
-    eyecatch: {
-        url: string;
-    }
-    category: {
-        name: string;
-    }
-    publishedAt: string;
-}
-
 const styles = {
   base: "grid grid-rows-[auto_1fr_auto] items-center justify-items-center min-h-screen gap-16 font-[family-name:var(--font-geist-sans)] bg-white",
 }
