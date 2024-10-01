@@ -1,17 +1,30 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import { Header } from "@/components/organisms/header";
 import { getBlogs } from "@/utils/microCms/client";
 import { PageTitle } from "@/components/atoms/pageTittle";
 import { CardList } from "@/components/organisms/cardList";
 
-export const revalidate = 60;
-
 const styles = {
   base: "grid grid-rows-[auto_1fr_auto] items-center justify-items-center min-h-screen gap-16 font-[family-name:var(--font-geist-sans)] bg-white",
 }
 
-export default async function Home() {
-  const BlogArticles = await getBlogs()
-  
+export default function Home() {
+  const [blogArticles, setBlogArticles] = useState([]);
+
+  useEffect(() => {
+    async function fetchBlogs() {
+      try {
+        const blogs = await getBlogs();
+        setBlogArticles(blogs);
+      } catch (error) {
+        console.error('Error fetching blogs:', error);
+      }
+    }
+    fetchBlogs();
+  }, []);
+
   return (
     <div className={styles.base}>
       <Header />
@@ -21,9 +34,7 @@ export default async function Home() {
             <PageTitle title="Blog" />
         </div>
 
-        {/* ブログ記事一覧 */}
-        <CardList blogs={BlogArticles} />
-
+        <CardList blogs={blogArticles} />
       </main>
     </div>
   );
