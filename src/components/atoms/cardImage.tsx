@@ -7,17 +7,19 @@ type CardImageProps = {
 }
 
 const styles = {
-    CardImage:'w-full h-48 object-cover'
+    base:'w-full h-48 object-cover'
 }
 
-export const CardImage = ({  imageUrl, altText }: CardImageProps) => {
+const CardImage = ({  imageUrl, altText }: CardImageProps) => {
     return (
         <Image 
             src={`${imageUrl}?fm=webp`} 
             alt={altText} 
-            className={ styles.CardImage}
+            className={ styles.base}
             width={600} 
             height={400} 
     />
     )   
 }
+
+export default CardImage;

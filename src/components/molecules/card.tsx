@@ -1,9 +1,10 @@
-import { CardImage } from "../atoms/cardImage";
-import { CardStatusText } from "../atoms/cardStatusText";
-import { CardDescription } from "../atoms/cardDescription";
-import { CardTitle } from "../atoms/cardTitle";
+import  CardImage  from "../atoms/cardImage";
+import CardPublishedAt from "../atoms/cardPublishedAt";
+import CardDescription from "../atoms/cardDescription";
+import  CardTitle  from "../atoms/cardTitle";
 import { Blog } from "@/types/blog";
 import Link from "next/link";
+import CardCategoryName from "../atoms/cardCategoryName";
 
 
 export type CardProps = {
@@ -21,9 +22,10 @@ export const Card = ({ blog }: CardProps) => {
             <Link href={`/blog/${blog.id}`} passHref>
                 <CardImage imageUrl={blog.eyecatch?.url} altText={blog.title} />
                 <div className={styles.cardBody}>
+                    <CardPublishedAt publishedAt={blog.publishedAt} />
+                    <CardCategoryName cardCategoryName={blog.category.name} />
                     <CardTitle title={blog.title} />
                     <CardDescription description={blog.content} />
-                    <CardStatusText statusText={blog.publishedAt} />
                 </div>
             </Link>
         </li>
