@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import { getBlogDetail } from '../../../utils/microCms/client';
+import { getBlogDetail } from '@/app/api/microCms/route';
 import { Header } from '@/components/organisms/header';
 import Image from 'next/image';
 import BlogDetail from '@/components/molecules/blogDetail';
