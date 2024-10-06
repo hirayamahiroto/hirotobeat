@@ -19,7 +19,7 @@ export const Card = ({ blog }: CardProps) => {
     return (
         <li className={styles.card}>
             <Link href={`/blog/${blog.id}`} passHref>
-                <CardImage imageUrl={blog.eyecatch.url} altText={blog.title} />
+                <CardImage imageUrl={blog.eyecatch?.url} altText={blog.title} />
                 <div className={styles.cardBody}>
                     <CardTitle title={blog.title} />
                     <CardDescription description={blog.content} />

@@ -13,8 +13,8 @@ const styles = {
 export const CardImage = ({  imageUrl, altText }: CardImageProps) => {
     return (
         <Image 
-            src={imageUrl} 
-            alt={ altText} 
+            src={`${imageUrl}?fm=webp`} 
+            alt={altText} 
             className={ styles.CardImage}
             width={600} 
             height={400} 

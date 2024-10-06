@@ -70,10 +70,10 @@ const BlogDetailPage = () => {
                             Published on {new Date(blog.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
                         </p>
                         <p className="text-sm text-gray-500 mb-8 font-light">
-                            Category: {blog.category.name}
+                            Category: {blog.category?.name}
                         </p>
                         <Image
-                            src={blog.eyecatch.url}
+                            src={`${blog.eyecatch.url}?fm=webp`}
                             alt={blog.title}
                             width={1200}
                             height={800}

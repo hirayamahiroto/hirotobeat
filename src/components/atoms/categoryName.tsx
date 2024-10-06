@@ -2,7 +2,12 @@ const styles = {
     base: "border-2 border-gray-300 rounded-md p-2",
 }
 
-export const CategoryName = ({ link, text }: { link: string, text: string }) => {
+type CategoryNameProps = {
+    link?: string;
+    text?: string;
+}
+
+export const CategoryName = ({ link, text }: CategoryNameProps) => {
     return (
         <li className={styles.base}>
             <a href={link}>{text}</a>
