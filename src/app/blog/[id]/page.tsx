@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation';
 import { getBlogDetail } from '../../../utils/microCms/client';
 import { Header } from '@/components/organisms/header';
 import Image from 'next/image';
-import styles from './style.module.css';
+import BlogDetail from '@/components/molecules/blogDetail';
 
 type Blog = {
     id: string;
@@ -62,30 +62,7 @@ const BlogDetailPage = () => {
     return (
         <div id='blog' className={`blog bg-white min-h-screen text-gray-800`}>
             <Header />
-            <div className={`max-w-4xl mx-auto px-4 py-16 ${styles.blog}`}>
-                <article className="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-100">
-                    <div className="p-8">
-                        <h1 className="text-4xl font-bold text-gray-900 mb-4 leading-tight">{blog.title}</h1>
-                        <p className="text-sm text-gray-500 font-light">
-                            Published on {new Date(blog.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-                        </p>
-                        <p className="text-sm text-gray-500 mb-8 font-light">
-                            Category: {blog.category?.name}
-                        </p>
-                        <Image
-                            src={`${blog.eyecatch.url}?fm=webp`}
-                            alt={blog.title}
-                            width={1200}
-                            height={800}
-                            className="rounded-lg mb-8"
-                        />
-                        <div 
-                            className="prose prose-lg max-w-none text-gray-700 prose-headings:text-gray-900 prose-a:text-blue-600 hover:prose-a:text-blue-800 prose-strong:text-gray-900"
-                            dangerouslySetInnerHTML={{ __html: blog.content }} 
-                        />
-                    </div>
-                </article>
-            </div>
+            <BlogDetail blog={blog} />
         </div>
     );
 };
