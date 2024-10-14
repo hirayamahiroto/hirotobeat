@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Header } from "@/components/organisms/header";
-import { getBlogs } from "@/app/api/microCms/route";
+import { getBlogs } from "@/app/action";
 import { PageTitle } from "@/components/atoms/pageTittle";
 import { CardList } from "@/components/organisms/cardList";
 
