@@ -1,7 +1,9 @@
-import { NavItem } from "../../atoms/navItem"
+import { NavItem } from "../atoms/navItem"
 
 const navItems = [
     { href: "/", text: "Home" },
+    { href: "/", text: "About" },
+    { href: "/", text: "Contact" },
 ]
 
 const styles = {
