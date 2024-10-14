@@ -1,7 +1,7 @@
 
 const styles = {
     wrapper: 'md:flex flex-row gap-4 justify-between w-full',
-    base: "flex justify-center items-center text-9xl font-bold text-gray-800",
+    base: "flex justify-center items-center text-8xl font-bold text-gray-800",
 }
 
 export const PageTitle = ({ title }: { title: string }) => {

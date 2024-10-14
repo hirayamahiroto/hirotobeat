@@ -25,3 +25,153 @@ body {
     text-wrap: balance;
   }
 }
+
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f4f4f4;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
+  padding: 0 20px;
+}
+
+/* Main content area */
+main {
+  padding: 20px 0;
+}
+
+article {
+  background: #fff;
+  margin-bottom: 30px;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+article h2 {
+  color: #35424a;
+  margin-bottom: 15px;
+  font-size: 1.8em;
+}
+
+article h3 {
+  color: #35424a;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 1.4em;
+}
+
+article .meta {
+  font-size: 0.9em;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+article img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+/* Paragraph and text styles */
+article p {
+  margin-bottom: 15px;
+  line-height: 1.8;
+}
+
+article a {
+  color: #1d31e8;
+  text-decoration: none;
+}
+
+article a:hover {
+  text-decoration: underline;
+}
+
+article ul, article ol {
+  margin-bottom: 15px;
+  padding-left: 30px;
+}
+
+article ul {
+  list-style: disc;
+}
+
+article ol {
+  list-style: decimal;
+}
+
+article li {
+  margin-bottom: 5px;
+}
+
+article blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+}
+
+article blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+
+article blockquote p {
+  display: inline;
+}
+
+/* Code blocks */
+article pre {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  border-left: 3px solid #e8491d;
+  color: #666;
+  page-break-inside: avoid;
+  font-family: monospace;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 1.6em;
+  max-width: 100%;
+  overflow: auto;
+  padding: 1em 1.5em;
+  display: block;
+  word-wrap: break-word;
+}
+
+
+/* Responsive design */
+@media(max-width: 768px){
+  header h1,
+  header nav,
+  header nav li {
+    float: none;
+    text-align: center;
+    width: 100%;
+  }
+
+  header {
+    padding-bottom: 20px;
+  }
+
+  .container {
+    width: 95%;
+  }
+}
