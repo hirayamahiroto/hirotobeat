@@ -12,4 +12,3 @@ export const client = createClient({
     serviceDomain: serviceDomain,
     apiKey: apiKey,
 });
-
