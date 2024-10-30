@@ -12,6 +12,7 @@ const styles = {
 
 export default function Home() {
   const [blogArticles, setBlogArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchBlogs() {
@@ -20,6 +21,8 @@ export default function Home() {
         setBlogArticles(blogs);
       } catch (error) {
         console.error('Error fetching blogs:', error);
+      } finally {
+        setLoading(false);
       }
     }
     fetchBlogs();
@@ -34,7 +37,14 @@ export default function Home() {
             <PageTitle title="Blog" />
         </div>
 
-        <CardList blogs={blogArticles} />
+        {loading ? (
+          <p className='text-2xl font-semibold text-gray-500'>Loading...</p>
+        ) : blogArticles.length === 0 ? (
+          <p className='text-2xl font-semibold text-gray-500'>現在、記事が投稿されていません。</p>
+        ) : (
+          <CardList blogs={blogArticles} />
+        )}
+
       </main>
     </div>
   );
