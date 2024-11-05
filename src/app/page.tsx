@@ -1,32 +1,16 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { Header } from "@/components/organisms/header";
-import { getBlogs } from "@/app/action";
 import { PageTitle } from "@/components/atoms/pageTittle";
 import { CardList } from "@/components/organisms/cardList";
+import { useBlogs } from "@/hooks/blog";
 
 const styles = {
   base: "grid grid-rows-[auto_1fr_auto] items-center justify-items-center min-h-screen gap-16 font-[family-name:var(--font-geist-sans)] bg-white",
 }
 
 export default function Home() {
-  const [blogArticles, setBlogArticles] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchBlogs() {
-      try {
-        const blogs = await getBlogs();
-        setBlogArticles(blogs);
-      } catch (error) {
-        console.error('Error fetching blogs:', error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchBlogs();
-  }, []);
+  const { blogArticles, loading } = useBlogs();
 
   return (
     <div className={styles.base}>

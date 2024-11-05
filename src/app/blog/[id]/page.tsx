@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import  { getBlogDetail } from './action';
+import  { getBlogDetail } from '@/features/blog/getBlogDetail';
 import { Header } from '@/components/organisms/header';
 import Image from 'next/image';
+import { useBlogDetail } from '@/hooks/blog';
 import BlogDetail from '@/components/molecules/blogDetail';
 
 type Blog = {
@@ -21,25 +22,9 @@ type Blog = {
 };
 
 const BlogDetailPage = () => {
-    const params = useParams();
-    const id = params.id as string;
-    const [blog, setBlog] = useState<Blog | null>(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+    const { id } = useParams();
+    const { blog, loading, error } = useBlogDetail(id);
 
-    useEffect(() => {
-        if (id) {
-            getBlogDetail(id)
-                .then((data) => {
-                    setBlog(data);
-                    setLoading(false);
-                })
-                .catch((err) => {
-                    setError(err.message);
-                    setLoading(false);
-                });
-        }
-    }, [id]);
 
     if (loading) return (
         <div className="flex flex-col justify-center items-center h-screen bg-white">
