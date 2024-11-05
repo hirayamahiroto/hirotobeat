@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getBlogs } from '@/features/blog/getBlogs';
-import { getBlogDetail } from '@/features/blog/getBlogDetail';
+import { getBlogs, getBlogDetail } from '@/features/blog';
 
 
 export function useBlogs() {
@@ -34,7 +33,7 @@ export function useBlogDetail(id: string | string[]) {
         try {
         const data = await getBlogDetail(id as string);
         setBlog(data);
-        } catch (error) {
+        } catch (error: any) {
         setError(error.message);
         } finally {
         setLoading(false);

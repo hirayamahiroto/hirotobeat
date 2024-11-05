@@ -1,12 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import  { getBlogDetail } from '@/features/blog/getBlogDetail';
 import { Header } from '@/components/organisms/header';
 import Image from 'next/image';
 import { useBlogDetail } from '@/hooks/blog';
 import BlogDetail from '@/components/molecules/blogDetail';
+import Error from '@/components/atoms/error';
+import NotFound from '@/components/atoms/notFound';
 
 type Blog = {
     id: string;
@@ -41,8 +41,8 @@ const BlogDetailPage = () => {
         </div>
     );
 
-    if (error) return <div className="flex justify-center items-center h-screen text-red-500 text-xl font-light">Error loading blog: {error}</div>;
-    if (!blog) return <div className="flex justify-center items-center h-screen text-gray-400 text-xl font-light">No blog found</div>;
+    if (error) return <Error text='何らかの原因でエラーが発生しました。時間を空けて再度アクションをしてください。' />; 
+    if (!blog) return <NotFound text="記事が見つかりませんでした。" />;
 
     return (
         <div id='blog' className={`blog bg-white min-h-screen text-gray-800`}>
