@@ -8,19 +8,6 @@ import BlogDetail from '@/components/molecules/blogDetail';
 import Error from '@/components/atoms/error';
 import NotFound from '@/components/atoms/notFound';
 
-type Blog = {
-    id: string;
-    eyecatch: {
-        url: string;
-    };
-    title: string;
-    content: string;
-    category: {
-        name: string;
-    }
-    publishedAt: string;
-};
-
 const BlogDetailPage = () => {
     const { id } = useParams();
     const { blog, loading, error } = useBlogDetail(id);
