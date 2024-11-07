@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { getBlogs, getBlogDetail } from '@/features/blog';
-
+import { useCallback, useRef, useEffect, useState } from 'react';
+// import {  } from 'react';
+import { getBlogs, getBlogDetail, getAPI } from '@/features/blog';
 
 export function useBlogs() {
     const [blogArticles, setBlogArticles] = useState([]);
@@ -8,12 +8,12 @@ export function useBlogs() {
     
     async function fetchBlogs() {
         try {
-        const blogs = await getBlogs();
-        setBlogArticles(blogs);
+            const blogs = await getBlogs();
+            setBlogArticles(blogs);
         } catch (error) {
-        console.error('Error fetching blogs:', error);
+            console.error('Error fetching blogs:', error);
         } finally {
-        setLoading(false);
+            setLoading(false);
         }
     }
     
@@ -31,20 +31,71 @@ export function useBlogDetail(id: string | string[]) {
     
     async function fetchBlogDetail() {
         try {
-        const data = await getBlogDetail(id as string);
-        setBlog(data);
+            const data = await getBlogDetail(id as string);
+            setBlog(data);
         } catch (error: any) {
-        setError(error.message);
+            setError(error.message);
         } finally {
-        setLoading(false);
+            setLoading(false);
         }
     }
     
     useEffect(() => {
         if (id) {
-        fetchBlogDetail();
+            fetchBlogDetail();
         }
     }, [id]);
     
     return { blog, loading, error };
 }   
+
+// export function useBlogsApiTest() {
+//     const [APIResponse, setAPIResponse] = useState(null);
+//     const [loading, setLoading] = useState(true);
+//     const [error, setError] = useState(null);
+    
+//     async function fetchAPI() {
+//         try {
+//             const data = await getAPI();
+//             setAPIResponse(data);
+//         } catch (error: any) {
+//             setError(error.message);
+//         } finally {
+//             setLoading(false);
+//         }
+//     }
+    
+//     useEffect(() => {
+//         fetchAPI();
+//     }, []);
+    
+//     return { APIResponse, loading, error };
+// }
+
+export function useBlogsApiTest() {
+    const [APIResponse, setAPIResponse] = useState(null);
+    const [aaloading, setLoading] = useState(true);
+    
+    const fetchAPI = useCallback(async () => {
+        try {
+            const data = await getAPI();
+            setAPIResponse(data);
+        }
+        catch (error: any) {
+            console.error('Error fetching blogs:', error);
+        }
+        finally {
+            setLoading(false);
+        }
+    }, []);
+
+    
+    useEffect(() => {
+        fetchAPI();        
+    }, []);
+
+    // console.log('API Response:', aaloading);
+
+    
+    return { APIResponse, aaloading};
+}

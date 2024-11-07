@@ -1,4 +1,6 @@
 import { client } from '@/utils/microCms/client';
+import { Blog } from '@/types/blog';
+import { GET as GetBLogsAPITest } from '@/app/api/blog/route';
 
 const getBlogDetail = async (id: string) => {
     try {
@@ -20,5 +22,17 @@ const getBlogs = async () => {
     }
 };
 
-export { getBlogDetail, getBlogs };
+
+const getAPI = async () => {
+    try {
+        const blogs = await GetBLogsAPITest('sssss' as any); // APIを呼び出し
+        console
+        const data = await blogs.json(); // レスポンスをJSONとして解析
+        // console.log(data);
+        return data.message;
+    } catch (error) {
+        console.error('Error fetching blogs:', error);
+    }
+};
+    export { getBlogDetail, getBlogs, getAPI };
 
