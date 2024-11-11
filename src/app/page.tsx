@@ -3,8 +3,9 @@
 import { Header } from "@/components/organisms/header";
 import { PageTitle } from "@/components/atoms/pageTittle";
 import { CardList } from "@/components/organisms/cardList";
-import { useBlogs, useBlogsApiTest } from "@/hooks/blog";
-import { useEffect, useRef } from "react";
+import { useBlogs } from "@/hooks/blog/microCms";
+import { useBlogsApiTest } from "@/hooks/blog/custom";
+import { useEffect } from "react";
 
 const styles = {
   base: "grid grid-rows-[auto_1fr_auto] items-center justify-items-center min-h-screen gap-16 font-[family-name:var(--font-geist-sans)] bg-white",
