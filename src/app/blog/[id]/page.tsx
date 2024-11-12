@@ -3,7 +3,7 @@
 import { useParams } from 'next/navigation';
 import { Header } from '@/components/organisms/header';
 import Image from 'next/image';
-import { useBlogDetail } from '@/hooks/blog';
+import { useBlogDetail } from '@/hooks/blog/microCms';
 import BlogDetail from '@/components/molecules/blogDetail';
 import Error from '@/components/atoms/error';
 import NotFound from '@/components/atoms/notFound';
