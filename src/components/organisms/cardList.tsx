@@ -2,7 +2,7 @@ import { Card } from "@/components/molecules/card";
 import { Blog } from "@/types/blog";
 
 type BlogProps = {
-    blogs: Blog[];
+    blogs?: Blog[];
 }
 
 const styles = {
@@ -10,14 +10,18 @@ const styles = {
 }
 
 export const CardList = ({ blogs }: BlogProps) => {
+    // console.log('------------blogs - cardList:-----------------');
+    // console.log('blogs:', blogs);
     return (
         <ol className={ styles.cardList }>
-            {blogs.length === 0 ? (
-            <p className="text-gray-600">投稿がありません</p>
+            {blogs && blogs.length === 0 ? (
+                <p className="text-gray-600">投稿がありません</p>
+            ) : blogs ? (
+                blogs.map((blog: Blog) => (
+                    <Card key={blog.id} blog={blog} />
+                ))
             ) : (
-            blogs.map((blog: Blog) => (
-                <Card key={blog.id} blog={blog} />
-            ))
+                <p className="text-gray-600">ブログデータを取得できませんでした</p>
             )}
         </ol>
     );

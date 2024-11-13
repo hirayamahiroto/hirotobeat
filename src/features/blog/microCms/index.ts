@@ -1,6 +1,6 @@
 import { client } from '@/utils/microCms/client';
 
-const getBlogDetail = async (id: string) => {
+const getBlogDetail = async (id: string | string[]) => {
     try {
         const data = await client.get({ endpoint: `blogs/${id}` });
         return data;

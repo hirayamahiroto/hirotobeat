@@ -9,4 +9,5 @@ export type Blog = {
         name: string;
     }
     publishedAt: string;
+    error: string;
 }

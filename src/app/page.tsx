@@ -1,31 +1,22 @@
-'use client';
+'use server';
 
 import { Header } from "@/components/organisms/header";
 import { PageTitle } from "@/components/atoms/pageTittle";
 import { CardList } from "@/components/organisms/cardList";
-import { useBlogs } from "@/hooks/blog/microCms";
-import { useBlogsApiTest } from "@/hooks/blog/custom";
-import { useEffect } from "react";
+import { getBlogsApi } from "@/hooks/blog/server";
 
 const styles = {
   base: "grid grid-rows-[auto_1fr_auto] items-center justify-items-center min-h-screen gap-16 font-[family-name:var(--font-geist-sans)] bg-white",
 };
 
-export default function Home() {
-  const { blogArticles, loading } = useBlogs();
-  const { APIResponse, aaloading } = useBlogsApiTest();
+export default async function Home() {
+  const blogArticles = await getBlogsApi();
+  let loading = true;
   
-  // useEffectを使用しない場合、
-  useEffect(() => {
-    console.log('--------StrictModeで二度レンダリング前に実行される。----------');
-    console.log('aaaa' + blogArticles);
-    console.log('bbb' + APIResponse);
-    console.log('ccc' +aaloading);
-    console.log('------------------');
-    APIResponse
-    aaloading
-    blogArticles
-  }, [APIResponse, aaloading]);
+  if(blogArticles) {
+    loading = false;
+  }
+  
   return (
     <div className={styles.base}>
       <Header />
@@ -33,9 +24,10 @@ export default function Home() {
         <div className="md:flex flex-row gap-4 justify-between w-full">
           <PageTitle title="Blog" />
         </div>
+
         {loading ? (
           <p className="text-2xl font-semibold text-gray-500">Loading...</p>
-        ) : blogArticles.length === 0 ? (
+        ) : blogArticles === 0 ? (
           <p className="text-2xl font-semibold text-gray-500">現在、記事が投稿されていません。</p>
         ) : (
           <CardList blogs={blogArticles} />
