@@ -1,70 +1,58 @@
-'use client';
+'use server';
 
-import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
-import  { getBlogDetail } from './action';
+import { Suspense } from 'react';
+import { notFound } from 'next/navigation';
 import { Header } from '@/components/organisms/header';
 import Image from 'next/image';
 import BlogDetail from '@/components/molecules/blogDetail';
+import Error from '@/components/atoms/error';
+import { getBlogDetailAction } from '@/hooks/blog/server';
 
-type Blog = {
-    id: string;
-    eyecatch: {
-        url: string;
-    };
-    title: string;
-    content: string;
-    category: {
-        name: string;
-    }
-    publishedAt: string;
-};
+const Loading = () => (
+    <div className="flex flex-col justify-center items-center h-screen bg-white">
+        <div className="animate-pulse">
+        <Image
+            src="/images/logo.png"
+            alt="logo"
+            width={297}
+            height={90}
+            priority
+        />
+        </div>
+        <p className="mt-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600 text-2xl font-semibold tracking-wide">
+            Loading...
+        </p>
+    </div>
+);
 
-const BlogDetailPage = () => {
-    const params = useParams();
-    const id = params.id as string;
-    const [blog, setBlog] = useState<Blog | null>(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+async function BlogDetailPageContent({ id }: { id: string }) {
+    try {
+        const blog = await getBlogDetailAction(id);
+        const blogArticle = blog.blog;
 
-    useEffect(() => {
-        if (id) {
-            getBlogDetail(id)
-                .then((data) => {
-                    setBlog(data);
-                    setLoading(false);
-                })
-                .catch((err) => {
-                    setError(err.message);
-                    setLoading(false);
-                });
+        if (!blog) {
+            notFound();
         }
-    }, [id]);
 
-    if (loading) return (
-        <div className="flex flex-col justify-center items-center h-screen bg-white">
-            <div className="animate-pulse">
-                <Image
-                    src="/images/logo.png"
-                    alt="logo"
-                    width={297}
-                    height={90}
-                    priority
-                />
-            </div>
-            <p className="mt-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600 text-2xl font-semibold tracking-wide">Loading...</p>
-        </div>
-    );
-
-    if (error) return <div className="flex justify-center items-center h-screen text-red-500 text-xl font-light">Error loading blog: {error}</div>;
-    if (!blog) return <div className="flex justify-center items-center h-screen text-gray-400 text-xl font-light">No blog found</div>;
-
-    return (
-        <div id='blog' className={`blog bg-white min-h-screen text-gray-800`}>
+        return (
+            <div id='blog' className={`blog bg-white min-h-screen text-gray-800`}>
             <Header />
-            <BlogDetail blog={blog} />
-        </div>
-    );
-};
+            <BlogDetail blog={blogArticle} />
+            </div>
+        );
+    } catch (error) {
+        return <Error text='何らかの原因でエラーが発生しました。時間を空けて再度アクションをしてください。' />;
+    }
+}
 
-export default BlogDetailPage;
+export default async function BlogDetailPage({
+    params: { id },
+}: {
+    params: { id: string };
+}) {
+    return (
+        <Suspense fallback={<Loading />}>
+            <BlogDetailPageContent id={id} />
+        </Suspense>
+    );
+}
