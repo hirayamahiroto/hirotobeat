@@ -10,8 +10,6 @@ const styles = {
 }
 
 export const CardList = ({ blogs }: BlogProps) => {
-    // console.log('------------blogs - cardList:-----------------');
-    // console.log('blogs:', blogs);
     return (
         <ol className={ styles.cardList }>
             {blogs && blogs.length === 0 ? (
