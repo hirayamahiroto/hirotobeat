@@ -1,12 +1,6 @@
 'use server';
 
-import { getAPI } from '@/features/blog/custom';
 import { getBlogs, getBlogDetail } from '@/features/blog/microCms';
-
-async function getBlogsApiTest() {
-    const data = await getAPI();
-    return data;
-}
 
 async function getBlogsApi() {
     const data = await getBlogs();
@@ -22,4 +16,4 @@ export async function getBlogDetailAction(id: string) {
     }
 }
  
-export { getBlogsApiTest, getBlogsApi };
+export { getBlogsApi };
