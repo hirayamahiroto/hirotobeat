@@ -12,7 +12,15 @@ const getBlogDetail = async (id: string | string[]) => {
 
 const getBlogs = async () => {
     try {
-        const data = await client.get({ endpoint: "blogs" });          
+        const data = await client.get({ 
+            endpoint: "blogs",
+            queries: {
+                limit: 100,
+            },
+            customRequestInit: {
+                cache: "no-store",
+            },
+        }); 
         return data.contents;
     } catch (error) {
         console.error('Error fetching blogs:', error);
