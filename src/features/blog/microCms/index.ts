@@ -18,7 +18,9 @@ const getBlogs = async () => {
                 limit: 100,
             },
             customRequestInit: {
-                cache: "no-store",
+                next: {
+                    revalidate: 0,
+                },
             },
         }); 
         return data.contents;
