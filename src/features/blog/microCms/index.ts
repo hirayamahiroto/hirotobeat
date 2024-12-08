@@ -14,9 +14,11 @@ const getBlogs = async () => {
     try {
         const data = await client.get({ 
             endpoint: "blogs",
-            cache: "no-cache",
             queries: {
                 limit: 100,
+            },
+            customRequestInit: {
+                cache: "no-store",
             },
         }); 
         return data.contents;
