@@ -1,4 +1,4 @@
-'use client';
+'use server';
 
 import { Suspense } from 'react';
 import { notFound } from 'next/navigation';
@@ -6,7 +6,7 @@ import { Header } from '@/components/organisms/header';
 import Image from 'next/image';
 import BlogDetail from '@/components/molecules/blogDetail';
 import Error from '@/components/atoms/error';
-import { getBlogDetailAction } from '@/hooks/blog/server';
+import { useBlogDetail } from '@/hooks/blog/server';
 
 const Loading = () => (
     <div className="flex flex-col justify-center items-center h-screen bg-white">
@@ -27,7 +27,7 @@ const Loading = () => (
 
 async function BlogDetailPageContent({ id }: { id: string }) {
     try {
-        const blog = await getBlogDetailAction(id);
+        const blog = await useBlogDetail(id);
         const blogArticle = blog.blog;
 
         if (!blog) {

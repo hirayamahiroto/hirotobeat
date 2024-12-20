@@ -3,14 +3,14 @@
 import { Header } from "@/components/organisms/header";
 import { PageTitle } from "@/components/atoms/pageTittle";
 import { CardList } from "@/components/organisms/cardList";
-import { getBlogsApi } from "@/hooks/blog/server";
+import { useBlogs } from "@/hooks/blog/server";
 
 const styles = {
   base: "grid grid-rows-[auto_1fr_auto] items-center justify-items-center min-h-screen gap-16 font-[family-name:var(--font-geist-sans)] bg-white",
 };
 
 export default async function Home() {
-  const blogArticles = await getBlogsApi();
+  const blogArticles = await useBlogs();
   let loading = true;
   
   if(blogArticles) {
