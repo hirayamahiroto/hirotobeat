@@ -2,7 +2,14 @@ import { client } from '@/utils/microCms/client';
 
 const getBlogDetail = async (id: string | string[]) => {
     try {
-        const data = await client.get({ endpoint: `blogs/${id}` });
+        const data = await client.get({ 
+            endpoint: `blogs/${id}`,
+            customRequestInit: {
+                next: {
+                    revalidate: 0,
+                },
+            },
+        });
         return data;
     } catch (error) {
         console.error('Error fetching blog:', error);
