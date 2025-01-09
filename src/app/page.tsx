@@ -4,6 +4,7 @@ import { Header } from "@/components/organisms/header";
 import { PageTitle } from "@/components/atoms/pageTittle";
 import { CardList } from "@/components/organisms/cardList";
 import { useBlogs } from "@/hooks/blog/server";
+import { Blog } from "@/types/blog";
 
 const styles = {
   base: "grid grid-rows-[auto_1fr_auto] items-center justify-items-center min-h-screen gap-16 font-[family-name:var(--font-geist-sans)] bg-white",
@@ -16,7 +17,7 @@ export default async function Home() {
   if (blogArticles) {
     loading = false;
     blogArticles.sort(
-      (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+      (a: Blog, b: Blog) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
     );
   }
 

@@ -3,7 +3,6 @@ import BlogDetailTitle from "../atoms/blogDetailTitle";
 import BlogDetailPublishedAt from "../atoms/blogDetailPublishedAt";
 import BlogDetailCategoryName from "../atoms/blogDetailCategoryName";
 import BlogDetailContent from "../atoms/blogDetailContent";
-
 import { Blog } from "@/types/blog";
 
 type BlogDetailProps = {
