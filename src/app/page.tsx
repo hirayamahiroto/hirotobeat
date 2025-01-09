@@ -1,4 +1,4 @@
-'use server';
+"use server";
 
 import { Header } from "@/components/organisms/header";
 import { PageTitle } from "@/components/atoms/pageTittle";
@@ -12,11 +12,14 @@ const styles = {
 export default async function Home() {
   const blogArticles = await useBlogs();
   let loading = true;
-  
-  if(blogArticles) {
+
+  if (blogArticles) {
     loading = false;
+    blogArticles.sort(
+      (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+    );
   }
-  
+
   return (
     <div className={styles.base}>
       <Header />
@@ -27,7 +30,7 @@ export default async function Home() {
 
         {loading ? (
           <p className="text-2xl font-semibold text-gray-500">Loading...</p>
-        ) : blogArticles === 0 ? (
+        ) : blogArticles.length === 0 ? (
           <p className="text-2xl font-semibold text-gray-500">現在、記事が投稿されていません。</p>
         ) : (
           <CardList blogs={blogArticles} />
