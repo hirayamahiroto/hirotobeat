@@ -9,7 +9,6 @@ export function middleware() {
     [
       `default-src 'self'`,
       `script-src 'self' 'unsafe-inline' 'nonce-${nonce}'`,
-      `img-src 'self'`,
       `style-src 'self' 'unsafe-inline'`,
       `connect-src 'self'`,
     ].join("; ")
