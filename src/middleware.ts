@@ -8,7 +8,7 @@ export function middleware() {
     "Content-Security-Policy",
     [
       `script-src 'self' 'unsafe-inline' 'nonce-${nonce}'`,
-      `img-src 'self'`,
+      `img-src 'self' https://images.microcms-assets.io`,
       `style-src 'self' 'unsafe-inline'`,
       `connect-src 'self'`,
     ].join("; ")
